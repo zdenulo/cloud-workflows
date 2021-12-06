@@ -1,5 +1,5 @@
 import enum
-from typing import Union
+from typing import Union, List
 
 import yaml
 
@@ -7,7 +7,7 @@ yaml.emitter.Emitter.prepare_tag = lambda self, tag: ''
 yaml.Dumper.ignore_aliases = lambda *args: True  # avoid references in yaml
 from yamlable import yaml_info, YamlAble
 
-YAML_INDENT=4
+YAML_INDENT = 4
 
 
 class BaseObject(YamlAble):
@@ -231,7 +231,7 @@ class TryExceptRetry(Operation):
     Implementation of try/except/retry structure for error handling
     """
 
-    def __init__(self, try_steps: list[Step], retry: Retry = None, as_: str = None, except_steps: list[Step] = None):
+    def __init__(self, try_steps: List[Step], retry: Retry = None, as_: str = None, except_steps: List[Step] = None):
         self.try_steps = try_steps
         self.retry = retry
         self.as_ = as_
@@ -277,7 +277,7 @@ class Call(Operation):
 
 
 class Condition(BaseObject):
-    def __init__(self, condition: str, next_: Union[str, Step] = None, steps: list[Step] = None):
+    def __init__(self, condition: str, next_: Union[str, Step] = None, steps: List[Step] = None):
         """
 
         :param condition: string representation of evaluating condition
@@ -301,7 +301,7 @@ class Condition(BaseObject):
 
 
 class Switch(Operation):
-    def __init__(self, conditions: list[Condition], next_: Union[str, Operation] = None):
+    def __init__(self, conditions: List[Condition], next_: Union[str, Operation] = None):
         self.conditions = conditions
         self.next_ = next_
 
@@ -347,7 +347,7 @@ class Assign(Operation):
     dictionary with multiple keys
     """
 
-    def __init__(self, variables: Union[list[dict], dict]):
+    def __init__(self, variables: Union[List[dict], dict]):
         self.variables = variables
 
     def to_dict(self):
