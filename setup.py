@@ -1,5 +1,5 @@
 import pathlib
-from setuptools import setup
+from setuptools import setup, find_packages
 
 BASE = pathlib.Path(__file__).parent
 
@@ -23,7 +23,7 @@ setup(
         "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 3.9",
     ],
-    packages=["workflows"],
+    packages=find_packages(),
     include_package_data=True,
     install_requires=["pyyaml", "yamlable"],
 )
